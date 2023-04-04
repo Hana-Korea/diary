@@ -16,7 +16,6 @@ export default DiaryContextProvider;
 
 export function useDiary() {
   const { data, setData, dataId } = useContext(DiaryContext);
-
   const onCreate = (author, content, emotion) => {
     const created_date = new Date().toLocaleString("ko-KR");
     const newItem = {
@@ -28,7 +27,10 @@ export function useDiary() {
     };
     dataId.current += 1;
     setData([newItem, ...data]);
+    console.log([newItem, ...data]);
+    localStorage.setItem("todos", JSON.stringify([newItem, ...data]));
   };
+  const savedDiary = JSON.parse(localStorage.getItem("todos"));
 
   const onDelete = (id) => setData(data.filter((item) => item.id !== id));
 
@@ -38,5 +40,6 @@ export function useDiary() {
     dataId,
     onCreate,
     onDelete,
+    savedDiary,
   };
 }

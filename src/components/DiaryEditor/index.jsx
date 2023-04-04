@@ -26,7 +26,6 @@ function DiaryEditor() {
     // }
 
     onCreate(userInput.author, userInput.content, userInput.emotion);
-
     setUserInput({ author: "", content: "", emotion: 1 });
     // alert("저장!");
   };

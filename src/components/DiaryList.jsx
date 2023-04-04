@@ -3,11 +3,10 @@ import DiaryItem from "./DiaryItem";
 import { useDiary } from "../context/DiaryContext";
 import { useEffect } from "react";
 function DiaryList() {
-  const { data } = useDiary();
-
+  const { savedDiary } = useDiary();
   return (
     <div>
-      {data.map((item) => (
+      {savedDiary.map((item) => (
         <div key={item.id}>
           <DiaryItem {...item} />
         </div>

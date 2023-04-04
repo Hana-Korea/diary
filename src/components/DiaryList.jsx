@@ -1,10 +1,10 @@
 import React from "react";
 import DiaryItem from "./DiaryItem";
-// import dummyList from "../constants/data";
 import { useDiary } from "../context/DiaryContext";
+import { useEffect } from "react";
 function DiaryList() {
   const { data } = useDiary();
-  console.log(data);
+
   return (
     <div>
       {data.map((item) => (

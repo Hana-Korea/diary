@@ -31,3 +31,6 @@ textarea {
   padding: 10px;
   cursor: pointer;
 }
+.DiaryItem textarea {
+  height: 100px;
+}

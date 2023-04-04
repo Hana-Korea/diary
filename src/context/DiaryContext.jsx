@@ -1,6 +1,7 @@
 import { createContext, useState, useRef, useContext } from "react";
 
 export const DiaryContext = createContext();
+
 function DiaryContextProvider({ children }) {
   const [data, setData] = useState([]);
   const dataId = useRef(0);
@@ -11,6 +12,8 @@ function DiaryContextProvider({ children }) {
     </DiaryContext.Provider>
   );
 }
+export default DiaryContextProvider;
+
 export function useDiary() {
   const { data, setData, dataId } = useContext(DiaryContext);
 
@@ -27,10 +30,13 @@ export function useDiary() {
     setData([newItem, ...data]);
   };
 
+  const onDelete = (id) => setData(data.filter((item) => item.id !== id));
+
   return {
     data,
+    setData,
     dataId,
     onCreate,
+    onDelete,
   };
 }
-export default DiaryContextProvider;

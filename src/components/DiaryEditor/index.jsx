@@ -3,8 +3,10 @@ import { useState, useRef } from "react";
 import Input from "./Input";
 import Content from "./Content";
 import Option from "./Option";
+import { useDiary } from "../../context/DiaryContext";
 
-function DiaryEditor({ onCreate }) {
+function DiaryEditor() {
+  const { onCreate } = useDiary();
   const [userInput, setUserInput] = useState({
     author: "",
     content: "",
@@ -16,15 +18,17 @@ function DiaryEditor({ onCreate }) {
   const authorInput = useRef();
   const textInput = useRef();
   const handleSubmit = (e) => {
-    if (userInput.author.length < 2) {
-      authorInput.current.focus();
-    }
-    if (userInput.content.length < 5) {
-      textInput.current.focus();
-    }
+    // if (userInput.author.length < 2) {
+    //   authorInput.current.focus();
+    // }
+    // if (userInput.content.length < 5) {
+    //   textInput.current.focus();
+    // }
+
     onCreate(userInput.author, userInput.content, userInput.emotion);
+
     setUserInput({ author: "", content: "", emotion: 1 });
-    alert("저장!");
+    // alert("저장!");
   };
 
   return (

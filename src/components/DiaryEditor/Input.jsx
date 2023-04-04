@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 
-function Input({}, ref) {
+function Input({ userInput, handleChangeState }, ref) {
   return (
     <div>
       <input

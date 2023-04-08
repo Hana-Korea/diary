@@ -1,7 +1,7 @@
 import "./App.css";
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
-import DiaryContextProvider, { useDiary } from "./context/DiaryContext";
+import DiaryContextProvider from "./context/DiaryContext";
 function App() {
   return (
     <div className="App">

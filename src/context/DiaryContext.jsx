@@ -27,12 +27,22 @@ export function useDiary() {
     };
     dataId.current += 1;
     setData([newItem, ...data]);
-    console.log([newItem, ...data]);
-    localStorage.setItem("todos", JSON.stringify([newItem, ...data]));
+    localStorage.setItem("diary", JSON.stringify([newItem, ...data]));
   };
-  const savedDiary = JSON.parse(localStorage.getItem("todos"));
 
-  const onDelete = (id) => setData(data.filter((item) => item.id !== id));
+  const onDelete = (id) => {
+    const dataAfterDel = data.filter((it) => it.id !== id);
+    setData(dataAfterDel);
+    localStorage.setItem("diary", JSON.stringify(dataAfterDel));
+  };
+  const onUpdate = (id, updateContent) => {
+    const dataAfterUpdate = data.map((it) =>
+      id == it.id ? { ...it, content: updateContent } : it
+    );
+    setData(dataAfterUpdate);
+    localStorage.setItem("diary", JSON.stringify(dataAfterUpdate));
+  };
+  const savedDiary = JSON.parse(localStorage.getItem("diary"));
 
   return {
     data,
@@ -40,6 +50,10 @@ export function useDiary() {
     dataId,
     onCreate,
     onDelete,
+    onUpdate,
     savedDiary,
   };
 }
+// 질문*
+// UseDiary() 말고 Context에 전부 저장??
+// localStorage.setItem("diary", JSON.stringify(data)) <- 왜안되는지?

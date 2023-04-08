@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import { useDiary } from "../context/DiaryContext";
-function DiaryItem({ ...item }) {
-  const { onDelete, data, setData } = useDiary();
+function DiaryItem({ item }) {
+  const { onDelete, onUpdate, data } = useDiary();
   const [updateContent, setUpdateContent] = useState("");
-  const [updateBtnContent, setUpdateBtnContent] = useState("수정하기");
-  const [deleteBtnContent, setDeleteBtnContent] = useState("삭제하기");
   const [isEdit, setIsEdit] = useState(false);
-  const removeItem = () => {
-    onDelete(item.id);
-  };
+
   const toggleUpdateBtn = () => {
     setIsEdit(!isEdit);
-    setUpdateBtnContent(isEdit ? "수정하기" : "수정완료");
-    setDeleteBtnContent(isEdit ? "삭제하기" : "수정취소");
-  };
-
-  const onUpdate = (id) => {
-    setData(
-      data.map((it) => (id == it.id ? { ...it, content: updateContent } : it))
-    );
   };
 
   return (
@@ -36,23 +24,32 @@ function DiaryItem({ ...item }) {
       )}
       <h5>{item.emotion}</h5>
       <h5>{item.created_date}</h5>
-      <button
-        onClick={() => {
-          toggleUpdateBtn();
-          if (isEdit == true) {
-            onUpdate(item.id);
-          }
-        }}
-      >
-        {updateBtnContent}
-      </button>
-      <button
-        onClick={() => {
-          removeItem();
-        }}
-      >
-        {deleteBtnContent}
-      </button>
+
+      {isEdit ? (
+        <>
+          {" "}
+          <button onClick={toggleUpdateBtn}>수정취소</button>{" "}
+          <button
+            onClick={() => {
+              onUpdate(item.id, updateContent);
+              toggleUpdateBtn();
+            }}
+          >
+            수정완료
+          </button>{" "}
+        </>
+      ) : (
+        <>
+          <button onClick={toggleUpdateBtn}>수정하기</button>
+          <button
+            onClick={() => {
+              onDelete(item.id);
+            }}
+          >
+            삭제하기
+          </button>
+        </>
+      )}
     </div>
   );
 }

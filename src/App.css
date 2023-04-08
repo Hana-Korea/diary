@@ -34,3 +34,9 @@ textarea {
 .DiaryItem textarea {
   height: 100px;
 }
+.Option {
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

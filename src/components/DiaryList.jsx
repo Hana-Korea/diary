@@ -1,16 +1,17 @@
 import React from "react";
 import DiaryItem from "./DiaryItem";
 import { useDiary } from "../context/DiaryContext";
-import { useEffect } from "react";
 function DiaryList() {
-  const { savedDiary } = useDiary();
+  const { data, savedDiary } = useDiary();
   return (
     <div>
-      {savedDiary.map((item) => (
-        <div key={item.id}>
-          <DiaryItem {...item} />
-        </div>
-      ))}
+      {savedDiary !== null
+        ? savedDiary.map((item) => (
+            <div key={item.id}>
+              <DiaryItem item={item} />
+            </div>
+          ))
+        : null}
     </div>
   );
 }

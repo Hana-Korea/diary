@@ -1,6 +1,6 @@
 import React from "react";
 import DiaryItem from "./DiaryItem";
-import { useDiary } from "../context/DiaryContext";
+import { useDiary } from "../../context/DiaryContext";
 function DiaryList() {
   const { savedDiary } = useDiary();
   return (

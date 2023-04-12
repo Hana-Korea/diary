@@ -1,14 +1,14 @@
 import React from "react";
-import { useDiary } from "../../context/DiaryContext";
+import { useDiary } from "../../../context/DiaryContext";
 import { useState, useRef } from "react";
 import Input from "./Input";
 import Content from "./Content";
 import Option from "./Option";
-import Happy from "../../../public/happy.gif";
-import Joy from "../../../public/joy.gif";
-import Loopy from "../../../public/Loopy.png";
-import frown from "../../../public/frown.gif";
-import sad from "../../../public/sad.gif";
+import Happy from "@@/happy.gif";
+import Joy from "@@/joy.gif";
+import Loopy from "@@/Loopy.png";
+import frown from "@@/frown.gif";
+import sad from "@@/sad.gif";
 function DiaryEditor() {
   const { onCreate, emoticonMap } = useDiary();
   const [userInput, setUserInput] = useState({
@@ -33,13 +33,11 @@ function DiaryEditor() {
     //   textInput.current.focus();
     // }
     onCreate(userInput.author, userInput.content, userInput.emotion);
-
     // alert("저장!");
   };
 
   const showImage = () => {
     setIsWritten(true);
-    console.log(userInput.emotion);
     switch (userInput.emotion) {
       case "1😭":
         setLogo(

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDiary } from "../context/DiaryContext";
+import { useDiary } from "../../context/DiaryContext";
 
 function DiaryItem({ item }) {
   const { onDelete, onUpdate, emoticonMap } = useDiary();

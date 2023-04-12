@@ -17,6 +17,7 @@ function Login() {
     if (prevLogin) {
       localStorage.setItem("user", JSON.stringify([...prevLogin, newLogin]));
     }
+    console.log("회원가입됨");
     setEmail("");
     setPassword("");
   };

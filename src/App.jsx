@@ -1,22 +1,31 @@
 import "./App.css";
-import DiaryEditor from "./components/DiaryEditor";
-import DiaryList from "./components/DiaryList";
 import Login from "./components/Login/Login";
-import DiaryContextProvider from "./context/DiaryContext";
-import { Routes, Route, Link } from "react-router-dom";
+import Diary from "./components/Diary";
+import { Routes, Route, NavLink } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <DiaryContextProvider>
-        <>
-          {" "}
-          <Login />
-          <DiaryEditor />
-          <DiaryList />
-        </>
-      </DiaryContextProvider>
+      <>
+        <NavLink to="/">홈</NavLink>
+        <NavLink
+          to="/login"
+          style={({ isActive }) => ({ color: isActive ? "red" : "black" })}
+        >
+          로그인
+        </NavLink>
+        <NavLink
+          to="/diary"
+          style={({ isActive }) => ({
+            background: isActive ? "orange" : "pink",
+            color: isActive ? "red" : "blue",
+          })}
+        >
+          다이어리
+        </NavLink>
+      </>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/diary" element={<Diary />} />
       </Routes>
     </div>
   );

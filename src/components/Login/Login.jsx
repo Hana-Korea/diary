@@ -1,8 +1,10 @@
 import React from "react";
+import Fetch from "./Fetch";
 import { useRef, useState } from "react";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fetch, setFetch] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
   const createAccount = () => {
@@ -29,16 +31,21 @@ function Login() {
     );
     setEmail("");
     setPassword("");
-    validUser ? alert("안녕하세요") : alert("회원가입해주세요");
+    validUser ? setFetch(true) : alert("회원가입해주세요");
   };
 
   const checkEmail = (userEmail) => {
     const emailRegexp = /[a-zA-Z0-9]*@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,3}/;
-    return emailRegexp.test(userEmail);
+    console.log();
+    if (emailRegexp.test(userEmail) === false) {
+      return console.log("false");
+    }
   };
   const checkPassword = (userPassword) => {
     const passwordRegexp = /[a-zA-Z0-9~!@#$%";'^,&*()_+|</>=>`?:{[\}]{8,20}/;
-    return passwordRegexp.test(userPassword);
+    if (passwordRegexp.test(userPassword) === false) {
+      return console.log("false");
+    }
   };
 
   return (
@@ -53,6 +60,9 @@ function Login() {
         onChange={(e) => {
           setEmail(e.target.value);
         }}
+        onBlur={(e) => {
+          checkEmail(e.target.value);
+        }}
       />
       <label htmlFor="password">비밀번호</label>
       <input
@@ -65,11 +75,7 @@ function Login() {
         onChange={(e) => {
           setPassword(e.target.value);
         }}
-        // onKeyDown={(e) => {
-        //   if (e.key === "Enter") {
-        //     alert("환영합니다!");
-        //   }
-        // }}
+        onBlur={checkPassword}
       />
       <button
         onClick={(e) => {
@@ -87,7 +93,7 @@ function Login() {
       >
         로그인
       </button>
-      {<button>fetch</button>}
+      {fetch == true ? <Fetch /> : null}
     </form>
   );
 }

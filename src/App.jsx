@@ -3,6 +3,7 @@ import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
 import Login from "./components/Login/Login";
 import DiaryContextProvider from "./context/DiaryContext";
+import { Routes, Route, Link } from "react-router-dom";
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,9 @@ function App() {
           <DiaryList />
         </>
       </DiaryContextProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }

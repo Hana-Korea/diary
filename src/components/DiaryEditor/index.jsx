@@ -4,8 +4,11 @@ import { useState, useRef } from "react";
 import Input from "./Input";
 import Content from "./Content";
 import Option from "./Option";
-// import tiger from "../../../public";
-
+import Happy from "../../../public/happy.gif";
+import Joy from "../../../public/joy.gif";
+import Loopy from "../../../public/Loopy.png";
+import frown from "../../../public/frown.gif";
+import sad from "../../../public/sad.gif";
 function DiaryEditor() {
   const { onCreate, emoticonMap } = useDiary();
   const [userInput, setUserInput] = useState({
@@ -13,11 +16,13 @@ function DiaryEditor() {
     content: "",
     emotion: 1,
   });
-
+  const [logo, setLogo] = useState(
+    <img src={Happy} style={{ width: "200px", height: "200px" }} />
+  );
+  const [isWritten, setIsWritten] = useState(false);
   const handleChangeState = (e) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
   };
-  const [logo, setLogo] = useState(1);
   const authorInput = useRef();
   const textInput = useRef();
   const handleSubmit = () => {
@@ -28,23 +33,36 @@ function DiaryEditor() {
     //   textInput.current.focus();
     // }
     onCreate(userInput.author, userInput.content, userInput.emotion);
-    setUserInput({ author: "", content: "", emotion: 1 });
+
     // alert("저장!");
   };
 
   const showImage = () => {
+    setIsWritten(true);
+    console.log(userInput.emotion);
     switch (userInput.emotion) {
-      case 1: {
-        return "https://media.tenor.com/olrLtkAKZ7AAAAAM/wave-inside-out.gif";
-      }
-      case 2: {
-        return "https://media.tenor.com/olrLtkAKZ7AAAAAM/wave-inside-out.gif";
-      }
-      case 3: {
-        return "https://media.tenor.com/cXI2cy9yEYoAAAAM/crying-sad.gif";
-      }
+      case "1😭":
+        setLogo(
+          <img src={Happy} style={{ width: "200px", height: "200px" }} />
+        );
+        break;
+      case "2😞":
+        setLogo(<img src={Joy} style={{ width: "200px", height: "200px" }} />);
+        break;
+      case "3😐":
+        setLogo(
+          <img src={Loopy} style={{ width: "200px", height: "200px" }} />
+        );
+        break;
+      case "4🙂":
+        setLogo(
+          <img src={frown} style={{ width: "200px", height: "200px" }} />
+        );
+        break;
+      case "5😊":
+        setLogo(<img src={sad} style={{ width: "200px", height: "200px" }} />);
+        break;
     }
-    setLogo("https://media.tenor.com/olrLtkAKZ7AAAAAM/wave-inside-out.gif");
   };
 
   return (
@@ -72,11 +90,12 @@ function DiaryEditor() {
         onClick={() => {
           handleSubmit();
           showImage();
+          setUserInput({ author: "", content: "", emotion: 1 });
         }}
       >
         저장
       </button>
-      {/* <img src={require{logo}} style={{ width: "200px", height: "200px" }} /> */}
+      {isWritten === true ? <div>{logo}</div> : null}
     </div>
   );
 }

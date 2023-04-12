@@ -2,7 +2,7 @@ import React from "react";
 import DiaryItem from "./DiaryItem";
 import { useDiary } from "../context/DiaryContext";
 function DiaryList() {
-  const { data, savedDiary } = useDiary();
+  const { savedDiary } = useDiary();
   return (
     <div>
       {savedDiary !== null

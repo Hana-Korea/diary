@@ -29,7 +29,6 @@ export function useDiary() {
     setData([newItem, ...data]);
     localStorage.setItem("diary", JSON.stringify([newItem, ...data]));
   };
-
   const onDelete = (id) => {
     const dataAfterDel = data.filter((it) => it.id !== id);
     setData(dataAfterDel);
@@ -43,7 +42,13 @@ export function useDiary() {
     localStorage.setItem("diary", JSON.stringify(dataAfterUpdate));
   };
   const savedDiary = JSON.parse(localStorage.getItem("diary"));
-
+  const emoticonMap = {
+    1: "1😭",
+    2: "2😞",
+    3: "3😐",
+    4: "4🙂",
+    5: "5😊",
+  };
   return {
     data,
     setData,
@@ -52,8 +57,6 @@ export function useDiary() {
     onDelete,
     onUpdate,
     savedDiary,
+    emoticonMap,
   };
 }
-// 질문*
-// UseDiary() 말고 Context에 전부 저장??
-// localStorage.setItem("diary", JSON.stringify(data)) <- 왜안되는지?

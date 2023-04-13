@@ -1,31 +1,23 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import theme from "../styles/theme";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiUserCheck } from "react-icons/bi";
-
-import logo from "../../public/logo.jpg";
+import { BiHome } from "react-icons/bi";
+import logo from "/logo.jpg";
 function Layout() {
   return (
     <>
       <NavBar>
         <Logo src={logo} />
-        <StyledNavLink to="/">홈</StyledNavLink>
-        <StyledNavLink
-          to="/login"
-          style={({ isActive }) => ({ color: isActive ? "red" : "black" })}
-        >
+        <StyledNavLink to="/">
+          홈<Home />
+        </StyledNavLink>
+        <StyledNavLink to="/login">
           로그인
           <User />
         </StyledNavLink>
-        <StyledNavLink
-          to="/diary"
-          style={({ isActive }) => ({
-            background: isActive ? "orange" : "pink",
-            color: isActive ? "red" : "blue",
-          })}
-        >
+        <StyledNavLink to="/diary">
           다이어리
           <Pencil />
         </StyledNavLink>{" "}
@@ -36,24 +28,35 @@ function Layout() {
 }
 
 const NavBar = styled.div`
-  width: 600px;
   height: 50px;
   background: ${(props) => props.theme.palette.white};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 5px 5px;
 `;
 const Logo = styled.img`
   height: 50px;
   width: 50px;
   border-radius: 10%;
 `;
-const StyledNavLink = styled.li`
+const StyledNavLink = styled(NavLink)`
   text-decoration: none;
-  list-style: none;
   display: flex;
+  align-items: center;
+  margin: 3rem;
+  color: ${(props) => props.theme.palette.accent};
+  &:hover {
+    color: ${(props) => props.theme.palette.primary};
+  }
 `;
 const Pencil = styled(FaPencilAlt)`
-  font-size: 30px;
+  font-size: 1rem;
 `;
 const User = styled(BiUserCheck)`
-  font-size: 30px;
+  font-size: 1rem;
+`;
+const Home = styled(BiHome)`
+  font-size: 1rem;
 `;
 export default Layout;

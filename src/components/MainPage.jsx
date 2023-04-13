@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../public/quokka1.jpeg";
+import logo from "/quokka1.jpeg";
 import styled from "styled-components";
 
 function MainPage() {

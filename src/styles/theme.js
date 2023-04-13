@@ -1,5 +1,5 @@
 const palette = {
-  white: "#FFFBF5",
+  white: "#FEFAE0",
   background: "#EDF1D6",
   primary: "#9DC08B",
   secondary: "#609966",
@@ -13,5 +13,6 @@ const fontSizes = {
 };
 const theme = {
   palette,
+  fontSizes,
 };
 export default theme;

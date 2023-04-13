@@ -4,11 +4,11 @@ import { useState, useRef } from "react";
 import Input from "./Input";
 import Content from "./Content";
 import Option from "./Option";
-import Happy from "@@/happy.gif";
-import Joy from "@@/joy.gif";
-import Loopy from "@@/Loopy.png";
-import frown from "@@/frown.gif";
-import sad from "@@/sad.gif";
+import Happy from "/happy.gif";
+import Joy from "/joy.gif";
+import Loopy from "/Loopy.png";
+import frown from "/frown.gif";
+import sad from "/sad.gif";
 function DiaryEditor() {
   const { onCreate, emoticonMap } = useDiary();
   const [userInput, setUserInput] = useState({

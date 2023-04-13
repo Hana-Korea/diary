@@ -1,15 +1,12 @@
 /* editor */
 body {
   font-family: "IBM Plex Sans KR", sans-serif;
+  background-color: #edf1d6;
 }
 .DiaryEditor {
   border: 1px solid gray;
   text-align: center;
   padding: 20px;
-  /* background-image: url("https://media.tenor.com/cXI2cy9yEYoAAAAM/crying-sad.gif"); */
-  /* background-image: url("https://media.tenor.com/olrLtkAKZ7AAAAAM/wave-inside-out.gif"); */
-  /* background-image: url("https://i.pinimg.com/originals/1b/03/1a/1b031a8c064732ea0610dca6218c195a.gif"); */
-  /* background-image: url("https://i.gifer.com/m7.gif"); */
   background-image: url("https://www.artinsight.co.kr/data/tmp/2206/20220613133628_maqvywwk.jpg");
 }
 

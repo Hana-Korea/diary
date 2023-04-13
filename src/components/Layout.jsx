@@ -42,6 +42,7 @@ const Logo = styled.img`
 `;
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
+  min-width: 5rem;
   display: flex;
   align-items: center;
   margin: 3rem;

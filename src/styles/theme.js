@@ -1,11 +1,18 @@
 const palette = {
   white: "#FEFAE0",
+  beige: "#FAEDCD",
   background: "#EDF1D6",
   primary: "#9DC08B",
   secondary: "#609966",
   accent: "#40513B",
-  //  light-purple:"#E5D1FA",
   purple: "#674188",
+};
+const common = {
+  flexCenter: `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  `,
 };
 const fontSizes = {
   title: "1rem",
@@ -14,5 +21,6 @@ const fontSizes = {
 const theme = {
   palette,
   fontSizes,
+  common,
 };
 export default theme;

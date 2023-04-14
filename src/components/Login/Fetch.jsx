@@ -1,9 +1,10 @@
-import React from "react";
-import axios from "axios";
-
+import React from 'react';
+import axios from 'axios';
+import { Button } from './Login';
+import styled from 'styled-components';
 function Fetch() {
   return (
-    <button
+    <Button
       onClick={(e) => {
         e.preventDefault();
         axios
@@ -11,8 +12,9 @@ function Fetch() {
           .then((res) => console.log(res.data));
       }}
     >
+      {' '}
       fetch
-    </button>
+    </Button>
   );
 }
 

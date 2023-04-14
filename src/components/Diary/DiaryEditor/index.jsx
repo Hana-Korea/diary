@@ -1,23 +1,27 @@
-import React from "react";
-import { useDiary } from "../../../context/DiaryContext";
-import { useState, useRef } from "react";
-import Input from "./Input";
-import Content from "./Content";
-import Option from "./Option";
-import Happy from "/happy.gif";
-import Joy from "/joy.gif";
-import Loopy from "/Loopy.png";
-import frown from "/frown.gif";
-import sad from "/sad.gif";
+import React from 'react';
+import { useDiary } from '../../../context/DiaryContext';
+import { useState, useRef, useEffect } from 'react';
+import Input from './Input';
+import Content from './Content';
+import Option from './Option';
+import Happy from '/happy.gif';
+import Joy from '/joy.gif';
+import Loopy from '/Loopy.png';
+import frown from '/frown.gif';
+import sad from '/sad.gif';
+import { Cookies, useCookies } from 'react-cookie';
+
+// import Cookies from 'js-cookie';
 function DiaryEditor() {
   const { onCreate, emoticonMap } = useDiary();
   const [userInput, setUserInput] = useState({
-    author: "",
-    content: "",
+    author: '',
+    content: '',
     emotion: 1,
   });
+  const [cookies, setCookie, removeCookie] = useCookies(['img']);
   const [logo, setLogo] = useState(
-    <img src={Happy} style={{ width: "200px", height: "200px" }} />
+    <img src={Happy} style={{ width: '200px', height: '200px' }} />
   );
   const [isWritten, setIsWritten] = useState(false);
   const handleChangeState = (e) => {
@@ -35,37 +39,60 @@ function DiaryEditor() {
     onCreate(userInput.author, userInput.content, userInput.emotion);
     // alert("저장!");
   };
+  const allCookies = document.cookie;
+  const [imgSrc, setImgSrc] = useState('e');
+  useEffect(() => {
+    setImgSrc(allCookies.slice(4));
+  }, [allCookies]);
 
+  useEffect(() => {
+    setLogo(
+      <img src={`/${imgSrc}.gif`} style={{ width: '200px', height: '200px' }} />
+    );
+  }, [imgSrc]);
   const showImage = () => {
     setIsWritten(true);
     switch (userInput.emotion) {
-      case "1😭":
+      case '1😭':
+        setCookie('img', 'happy', { maxAge: 10 });
+        setImgSrc(allCookies.slice(4));
         setLogo(
-          <img src={Happy} style={{ width: "200px", height: "200px" }} />
+          <img src={imgSrc} style={{ width: '200px', height: '200px' }} />
         );
-        break;
-      case "2😞":
-        setLogo(<img src={Joy} style={{ width: "200px", height: "200px" }} />);
-        break;
-      case "3😐":
-        setLogo(
-          <img src={Loopy} style={{ width: "200px", height: "200px" }} />
-        );
-        break;
-      case "4🙂":
-        setLogo(
-          <img src={frown} style={{ width: "200px", height: "200px" }} />
-        );
-        break;
-      case "5😊":
-        setLogo(<img src={sad} style={{ width: "200px", height: "200px" }} />);
-        break;
+        return 1;
+      case '2😞':
+        setCookie('img', 'joy', { maxAge: 10 });
+        return 2;
+      case '3😐':
+        setCookie('img', 'Loopy', { maxAge: 10 });
+
+      // setLogo(
+      //   <img src={Loopy} style={{ width: '200px', height: '200px' }} />
+      // );
+      // return 2;
+      case '4🙂':
+        setCookie('img', 'frown', { maxAge: 10 });
+
+        // setLogo(
+        //   <img
+        //     src={`/${imgSrc}.gif`}
+        //     style={{ width: '200px', height: '200px' }}
+        //   />
+        // );
+        return 2;
+      case '5😊':
+        setCookie('img', 'sad', { maxAge: 10 });
+
+        setTitle(allCookies.slice(4));
+
+        setLogo(<img src={sad} style={{ width: '200px', height: '200px' }} />);
+        return 2;
     }
   };
 
   return (
-    <div className="DiaryEditor">
-      <h2>오늘의 일기</h2>
+    <div className='DiaryEditor'>
+      <h2>오늘의 일기{imgSrc}</h2>
 
       <Input
         ref={authorInput}
@@ -88,12 +115,12 @@ function DiaryEditor() {
         onClick={() => {
           handleSubmit();
           showImage();
-          setUserInput({ author: "", content: "", emotion: 1 });
+          setUserInput({ author: '', content: '', emotion: 1 });
         }}
       >
         저장
       </button>
-      {isWritten === true ? <div>{logo}</div> : null}
+      {isWritten ? <div>{logo}</div> : null}
     </div>
   );
 }

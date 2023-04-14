@@ -2,6 +2,7 @@ import React from "react";
 import Fetch from "./Fetch";
 import { useRef, useState } from "react";
 import styled from "styled-components";
+import { useCookies } from "react-cookie";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function Login() {
   const [fetch, setFetch] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [cookies, setCookie, removeCookie] = useCookies();
   const createAccount = () => {
     const newLogin = {
       email,
@@ -135,11 +137,10 @@ const Input = styled.input`
   &:focus {
     outline: none;
     background-color: ${(props) => props.theme.palette.beige};
-    /* border: 1px solid ${(props) => props.theme.palette.purple}; */
     transition: 0.2s ease-in-out;
   }
 `;
-const Button = styled.button`
+export const Button = styled.button`
   width: 15rem;
   height: 2rem;
   border-radius: 10px;

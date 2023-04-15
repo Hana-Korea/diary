@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Button } from './Login';
-import styled from 'styled-components';
 function Fetch() {
   return (
     <Button

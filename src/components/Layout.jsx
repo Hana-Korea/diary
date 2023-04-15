@@ -1,26 +1,26 @@
-import React from "react";
-import { NavLink, Link, Outlet } from "react-router-dom";
-import styled from "styled-components";
-import { FaPencilAlt } from "react-icons/fa";
-import { BiUserCheck } from "react-icons/bi";
-import { BiHome } from "react-icons/bi";
-import logo from "/logo.jpg";
+import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import { FaPencilAlt } from 'react-icons/fa';
+import { BiUserCheck } from 'react-icons/bi';
+import { BiHome } from 'react-icons/bi';
+import logo from '/logo.jpg';
 function Layout() {
   return (
     <>
       <NavBar>
         <Logo src={logo} />
-        <StyledNavLink to="/">
+        <StyledNavLink to='/'>
           홈<Home />
         </StyledNavLink>
-        <StyledNavLink to="/login">
+        <StyledNavLink to='/login'>
           로그인
           <User />
         </StyledNavLink>
-        <StyledNavLink to="/diary">
+        <StyledNavLink to='/diary'>
           다이어리
           <Pencil />
-        </StyledNavLink>{" "}
+        </StyledNavLink>{' '}
       </NavBar>
       <Outlet></Outlet>
     </>

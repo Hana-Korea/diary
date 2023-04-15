@@ -1,55 +1,50 @@
-import React from "react";
-import Fetch from "./Fetch";
-import { useRef, useState } from "react";
-import styled from "styled-components";
-import { useCookies } from "react-cookie";
+import React from 'react';
+import Fetch from './Fetch';
+import { useRef, useState } from 'react';
+import styled from 'styled-components';
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [fetch, setFetch] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [cookies, setCookie, removeCookie] = useCookies();
   const createAccount = () => {
     const newLogin = {
       email,
       password,
     };
-    const prevLogin = JSON.parse(localStorage.getItem("user"));
-    localStorage.setItem("user", JSON.stringify([newLogin]));
+    const prevLogin = JSON.parse(localStorage.getItem('user'));
+    localStorage.setItem('user', JSON.stringify([newLogin]));
     if (prevLogin) {
-      localStorage.setItem("user", JSON.stringify([...prevLogin, newLogin]));
+      localStorage.setItem('user', JSON.stringify([...prevLogin, newLogin]));
     }
-    console.log("회원가입됨");
-    setEmail("");
-    setPassword("");
+    console.log('회원가입됨');
   };
 
   const authenticateUser = () => {
-    const savedUsers = JSON.parse(localStorage.getItem("user"));
+    const savedUsers = JSON.parse(localStorage.getItem('user'));
     const userEmail = emailRef.current.value;
     const userPassword = passwordRef.current.value;
     const validUser = savedUsers.some(
       (savedUser) =>
         userEmail === savedUser.email && userPassword === savedUser.password
     );
-    setEmail("");
-    setPassword("");
-    validUser ? setFetch(true) : alert("회원가입해주세요");
+    setEmail('');
+    setPassword('');
+    validUser ? setFetch(true) : alert('회원가입해주세요');
   };
 
   const checkEmail = (userEmail) => {
     const emailRegexp = /[a-zA-Z0-9]*@[a-zA-Z0-9]{2,}\.[a-zA-Z]{2,3}/;
-    console.log();
     if (emailRegexp.test(userEmail) === false) {
-      return console.log("false");
+      return console.log('false');
     }
   };
   const checkPassword = (userPassword) => {
     const passwordRegexp = /[a-zA-Z0-9~!@#$%";'^,&*()_+|</>=>`?:{[\}]{8,20}/;
     if (passwordRegexp.test(userPassword) === false) {
-      return console.log("false");
+      return console.log('false');
     }
   };
 
@@ -57,34 +52,36 @@ function Login() {
     <FormWrap>
       <Form>
         <InputWrap>
-          <label htmlFor="email">아이디(이메일)</label>
+          <label htmlFor='email'>아이디(이메일)</label>
           <Input
-            id="email"
-            placeholder="이메일 주소 입력"
+            id='email'
+            placeholder='이메일 주소 입력'
             ref={emailRef}
             value={email}
-            name="email"
+            name='email'
             onChange={(e) => {
               setEmail(e.target.value);
             }}
             onBlur={(e) => {
               checkEmail(e.target.value);
             }}
-          />{" "}
+          />{' '}
         </InputWrap>
         <InputWrap>
-          <label htmlFor="password">비밀번호</label>
+          <label htmlFor='password'>비밀번호</label>
           <Input
-            id="password"
-            name="password"
-            type="password"
+            id='password'
+            name='password'
+            type='password'
             ref={passwordRef}
             value={password}
-            placeholder="비밀번호 입력"
+            placeholder='비밀번호 입력'
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            onBlur={checkPassword}
+            onBlur={(e) => {
+              checkPassword(e.target.value);
+            }}
           />
         </InputWrap>
         <Button

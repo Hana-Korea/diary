@@ -11,7 +11,6 @@ import frown from '/frown.gif';
 import sad from '/sad.gif';
 import { Cookies, useCookies } from 'react-cookie';
 
-// import Cookies from 'js-cookie';
 function DiaryEditor() {
   const { onCreate, emoticonMap } = useDiary();
   const [userInput, setUserInput] = useState({
@@ -55,38 +54,18 @@ function DiaryEditor() {
     switch (userInput.emotion) {
       case '1😭':
         setCookie('img', 'happy', { maxAge: 10 });
-        setImgSrc(allCookies.slice(4));
-        setLogo(
-          <img src={imgSrc} style={{ width: '200px', height: '200px' }} />
-        );
-        return 1;
+        break;
       case '2😞':
         setCookie('img', 'joy', { maxAge: 10 });
-        return 2;
+        break;
       case '3😐':
         setCookie('img', 'Loopy', { maxAge: 10 });
-
-      // setLogo(
-      //   <img src={Loopy} style={{ width: '200px', height: '200px' }} />
-      // );
-      // return 2;
       case '4🙂':
         setCookie('img', 'frown', { maxAge: 10 });
-
-        // setLogo(
-        //   <img
-        //     src={`/${imgSrc}.gif`}
-        //     style={{ width: '200px', height: '200px' }}
-        //   />
-        // );
-        return 2;
+        break;
       case '5😊':
         setCookie('img', 'sad', { maxAge: 10 });
-
-        setTitle(allCookies.slice(4));
-
-        setLogo(<img src={sad} style={{ width: '200px', height: '200px' }} />);
-        return 2;
+        break;
     }
   };
 
